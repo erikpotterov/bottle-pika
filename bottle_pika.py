@@ -77,7 +77,7 @@ class PikaPlugin(object):
             try:
                 con = pika.BlockingConnection(params)
                 mq = con.channel()
-            except HTTPResponse, e:
+            except HTTPResponse as e:
                 raise HTTPError(500, "AMQP Error", e)
 
             # Add the channel as a keyword argument.
@@ -85,9 +85,9 @@ class PikaPlugin(object):
 
             try:
                 rv = callback(*args, **kwargs)
-            except HTTPError, e:
+            except HTTPError as e:
                 raise
-            except HTTPResponse, e:
+            except HTTPResponse as e:
                 raise
             finally:
                 if con:
